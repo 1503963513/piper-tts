@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  piper-tts:
+    build: .
+    container_name: piper-tts-service
+    restart: unless-stopped
+    ports:
+      - "19527:5001"
+    environment:
+      - PIPER_PORT=5001
+      # 显式指定模型目录，尽管代码里有默认值，这样更保险
+      - MODEL_DIR=/app/models
+    # 增加共享内存大小，防止 ONNXRuntime 或多进程处理大文件时 OOM
+    shm_size: '1gb'
+    # 如果需要在宿主机查看日志或调试，可以取消下面注释
+    # volumes:
+    #   - ./logs:/app/logs
+    deploy:
+      resources:
+        limits:
+          # 根据你的服务器配置适当限制，避免占满 CPU
+          cpus: '4'
+          memory: 4G

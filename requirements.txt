@@ -1,0 +1,7 @@
+numpy<2
+flask==3.0.0
+flask-cors==4.0.0
+flask-sock==0.7.0
+piper-tts==1.2.0
+onnxruntime==1.15.1
+cn2an==0.5.22
